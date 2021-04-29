@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
-    s.name              = 'PokktSDK'
+    s.name              = 'PokktAds'
 
     s.version           = '8.0.1'
 
-    s.summary           = 'Pokkt SDK load ads'
+    s.summary           = 'PokktAds SDK load ads'
 
     s.homepage          = 'https://github.com/pokktdev/PokktPod.git'
 
@@ -29,5 +29,6 @@ Pod::Spec.new do |s|
     s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
 end
+
 
 
