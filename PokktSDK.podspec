@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name              = 'PokktSDK'
 
-    s.version           = '8.1.0'
+    s.version           = '8.0.1'
 
     s.summary           = 'Pokkt SDK load ads'
 
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
     s.platform          = :ios
 
-    s.source            = { :http => 'https://github.com/pokktdev/PokktPod/releases/download/8.0.1/pod_sdk.zip' }
+    s.source            = { :http => 'https://github.com/pokktdev/PokktPod/releases/download/8.0.1/PokktSDK.zip' }
 
     s.ios.deployment_target = '11.0'
 
