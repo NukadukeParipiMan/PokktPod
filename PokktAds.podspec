@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name              = 'PokktAds'
 
-    s.version           = '8.0.1'
+    s.version           = '8.1.0'
 
     s.summary           = 'PokktAds SDK load ads'
 
