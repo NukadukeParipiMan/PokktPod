@@ -10,6 +10,7 @@
 @property (nonatomic, retain) NSString* className;
 @property (nonatomic, retain) NSDictionary* customData;
 @property (nonatomic, retain) NSString* networkID;
+@property (nonatomic, retain) NSString* adFormat;
 @property (nonatomic, retain) NSString* intgrationType;
 @property (nonatomic, retain) NSString* allotedCacheTime;
 @property (nonatomic, retain) NSString* requestUrl;
@@ -30,7 +31,7 @@
 - (PokktNetworkModel *)getNetworkModel;
 - (void)cacheAd:(NSString *)screenId;
 - (void)showAd:(NSString *)screenId viewController:(UIViewController *)viewController;
-- (void)requestNativeAd:(NSString *)screenId;
+- (void)requestNativeAd:(NSString *)screenId withNativeAdConfig:(PokktNativeAdConfig *)nativeAdConfig;
 - (void)setCacheTimeOut:(NSString *)screenId;
 - (BOOL)isAdCached:(NSString *)screenId;
 - (void)notifyDataConsentChanged:(PokktConsentInfo *)consentInfo;
@@ -56,7 +57,7 @@
 + (void)onAdClosed:(PokktNetworkModel *)networkModel screenId:(NSString *)screenId adCompleted:(BOOL)adCompleted;
 + (void)onAdClicked:(PokktNetworkModel *)networkModel screenId:(NSString *)screenId;
 + (void)onAdGratified:(PokktNetworkModel *)networkModel screenId:(NSString *)screenId rewardPoint:(float)reward;
-+ (void)onNativeAdReady:(PokktNetworkModel *)networkModel screenId:(NSString *)screenId withNativeAd:(PokktNativeAd *)nativeAd;
-+ (void)onNativeAdFailed:(PokktNetworkModel *)networkModel screenId:(NSString *)screenId errorMessage:(NSString *)errorMsg;
++ (void)onNativeAdReady:(PokktNetworkModel *)networkModel screenId:(NSString *)screenId withNativeAd:(PokktNativeAd *)nativeAd withNativeAdConfig:(PokktNativeAdConfig *)nativeAdConfig;
++ (void)onNativeAdFailed:(PokktNetworkModel *)networkModel screenId:(NSString *)screenId errorMessage:(NSString *)errorMsg withNativeAdConfig:(PokktNativeAdConfig *)nativeAdConfig;
 
 @end

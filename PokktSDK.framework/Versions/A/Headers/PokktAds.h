@@ -2,8 +2,14 @@
 #import <UIKit/UIKit.h>
 #import "PokktModels.h"
 
-
 @class PokktNativeAd;
+
+@protocol PokktInitDelegate <NSObject>
+
+- (void)onPokktSDKInitialized:(NSString *)errorMessage;
+
+@end
+
 
 @protocol PokktAdDelegate <NSObject>
 
@@ -19,16 +25,46 @@
 
 @end
 
-
 @interface PokktNativeAd : NSObject
 
 - (UIView *)getMediaView;
-- (void)dismiss;
+- (UIView *)getMainImage;
+- (NSDictionary *)getNativeAssets;
+- (UIImageView *)getIcon;
+- (UILabel *)getTitle;
+- (UIButton *)getClickThrough;
+- (UILabel *)getBody;
+- (UILabel *)getSponsored;
+- (UILabel *)getRating;
+- (int)getRatingValue;
+- (UILabel *)getPrice;
+- (UILabel *)getCTA;
+- (UILabel *)getLikes;
+- (UILabel *)getDownloads;
+- (UILabel *)getSalePrice;
+- (UILabel *)getPhone;
+
+- (UILabel *)getAddress;
+- (UILabel *)getAdditionalDescriptive;
+- (UILabel *)getDisplayURL;
+
+- (void)recordImpression;
+- (void)destroy;
 
 // internal for pokkt sdk
-- (instancetype)initWithAd:(id)ad;
+- (instancetype)initWithAd:(id)ad image:(id)imageAd icon:(id)icon title:(id)title clickUrl:(id)clickUrl
+                      body:(id)body sponsor:(id)sponsor rating:(id)rating assets:(id)assets price:(id)price cta:(id)CTA like:(id)like download:(id)download sale:(id)sale phone:(id)phone address : (id)address descriptiveView : (id)descriptiveView displayURL : (id )displayURL;
 - (id)getAd;
 
+@property(assign, nonatomic) BOOL hasVideoAd;
+
+@end
+
+@interface PokktNativeAdViewBinder : NSObject
+
+- (instancetype)initWithNativeRootView:(UIView *)rootView mediaView:(UIView *)mediaView icon:(UIView *)icon title:(UILabel *)title ctaButton:(UIButton *)cta body:(UILabel *)body sponsor:(UILabel *)sponsor rating:(UILabel *)rating price:(UILabel *)price like:(UILabel *)like cta:(UILabel *)ctaText download:(UILabel *)download salePrice:(UILabel *)salePrice phoneNumber:(UILabel *)phone address:(UILabel *)address additionalDescriptive:(UILabel *)additionalDesc displayURL:(UILabel *)displayURL;
+
+- (void) populateView:(PokktNativeAd *)nativeAd;
 @end
 
 
@@ -43,6 +79,12 @@
 @interface PokktAds : NSObject
 
 + (void)setPokktConfigWithAppId:(NSString *)appId securityKey:(NSString *)securityKey;
++ (void)setPokktConfigWithParams:(NSDictionary *)params;
+
++ (void)initSDKWithAppId:(NSString *)appId securityKey:(NSString *)securityKey delegate:(id<PokktInitDelegate>)delegate;
+
+#pragma mark for internal use only - dont expose in the release build
++ (void)setIpAddress:(NSString *)ip;
 
 + (BOOL)isAdCached:(NSString *)screenId;
 + (void)cacheAd:(NSString *)screenId withDelegate:(id<PokktAdDelegate>)delegate;
@@ -50,12 +92,22 @@
 + (void)showAd:(NSString *)screenId withDelegate:(id<PokktAdDelegate>)delegate presentingVC:(UIViewController *)viewController;
 + (void)showAd:(NSString *)screenId withDelegate:(id<PokktAdDelegate>)delegate inContainer:(UIView *)adContainer;
 
-+ (void)requestNativeAd:(NSString *)screenId withDelegate:(id<PokktAdDelegate>)delegate;
++ (void)requestNativeAd:(NSString *)screenId withDelegate:(id<PokktAdDelegate>)delegate withNativeAdConfig:(PokktNativeAdConfig *)nativeAdConfig;
 + (void)dismissAd:(NSString *)screenId;
 
 + (void)setPokktConsentInfo:(PokktConsentInfo *)consentObject;
 + (PokktConsentInfo *)getPokktConsentInfo;
 
++ (void)setDestinationAppStoreIdentifier:(NSString *)identifier;
++ (void)setSourceAppStoreIdentifier:(NSString *)identifier;
+
+/*
+ ATTrackingManagerAuthorizationStatusNotDetermined = 0,
+ ATTrackingManagerAuthorizationStatusRestricted = 1,
+ ATTrackingManagerAuthorizationStatusDenied = 2,
+ ATTrackingManagerAuthorizationStatusAuthorized = 3
+ */
++ (void)setAPPTrackingAuthorizationStatus:(int)trackingStatus;
 
 + (NSString *)getSDKVersion;
 + (void)setThirdPartyUserId:(NSString *)userId;
@@ -73,5 +125,7 @@
 + (void)printLog:(NSString *)message;
 + (void)showToast:(NSString *)message
    viewController:(UIViewController *)viewController;
++ (void)exportLog:(UIViewController *)viewController;
 
 @end
+

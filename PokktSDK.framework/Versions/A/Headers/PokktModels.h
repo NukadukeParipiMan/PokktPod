@@ -1,16 +1,166 @@
 #import <Foundation/Foundation.h>
-
 typedef enum : int
 {
     VIDEO = 0,
     BANNER = 1,
     INTERSTITIAL = 3,
-    INGAME_BRANDING = 4
+    INGAME_BRANDING = 4,
+    NATIVE = 5
 } AdFormatType;
 
 /**
  * This is ad request configuration. Developer should supply this in almost every ad related method.
  */
+
+
+@interface PokktNativeAdConfig : NSObject {
+}
+
+@property (nonatomic , strong) NSString *version; /* Version of the Native Markup version in use.*/
+
+/*
+  Description - The context in which the ad appears.
+ 
+ Params:
+  1 - Content-centric context such as newsfeed, article, image gallery, video
+ gallery, or similar.
+  2 - Social-centric context such as social network feed, email, chat, or similar.
+  3- Product context such as product listings, details, recommendations.
+  500+ - To be defined by the exchange.
+ reviews, or similar
+ 
+ Note: recommended
+ 
+ */
+@property (nonatomic , strong) NSString *context;
+
+/*
+  Description - Next-level context in which the ad appears.
+ 
+ Params:
+  10 - General or mixed content..
+  11 - Primarily article content (which of course could include images, etc
+ as part of the article).
+  12- Primarily video content.
+  13 - Primarily audio content.
+  14 - Primarily image content
+  15 - User-generated content - forums, comments, etc
+  20 - General social content such as a general social network
+  21 - Primarily email content
+  22 - Primarily chat/IM content
+  30 - Content focused on selling products, whether digital or physical
+  31 - Application store/marketplace
+  32 - Product reviews site primarily (which may sell product secondarily)
+  500+ - To be defined by the exchange
+ 
+ Note: optional
+ 
+ */
+
+@property (nonatomic , strong) NSString *subContext;
+
+/*
+  Description - The FORMAT of the ad you are purchasing, separate from the surrounding context.
+ 
+ Params:
+  1 - In the feed of content - for example as an item inside the organic
+ feed/grid/listing/carousel.
+  2 - In the atomic unit of the content - IE in the article page or single image page
+  3 - Outside the core content - for example in the ads section on the right
+ rail, as a banner-style placement near the content, etc.
+  4 - Recommendation widget, most commonly presented below the article content.
+  500+ - To be defined by the exchange
+ 
+ Note: recommended
+ */
+
+@property (nonatomic , strong) NSString *placementType;
+
+/*
+  Description - The number of identical placements in this Layout.
+ 
+ Params:
+  1 - In the feed of content - for example as an item inside the organic
+ feed/grid/listing/carousel.
+  2 - In the atomic unit of the content - IE in the article page or single image page
+  3 - Outside the core content - for example in the ads section on the right
+ rail, as a banner-style placement near the content, etc.
+  4 - Recommendation widget, most commonly presented below the article content.
+  500+ - To be defined by the exchange
+ 
+ Note: optional
+ */
+
+@property (nonatomic , strong) NSString *placementCount;
+
+/*
+  Description - 0 for the first ad, 1 for the second
+ ad, and so  on..
+ 
+ Note: optional
+ */
+
+@property (nonatomic , strong) NSString *sequence;
+
+/*
+  Description - Whether the supply source / impression supports returning an assetsurl instead of an asset object.
+ 0 or the absence of the field indicates no such support.
+ 
+ Note: optional
+ 
+ Need to discuss
+ */
+
+
+@property (nonatomic , strong) NSString *aURLSupport;
+
+/*
+  Description - Whether the supply source / impression supports returning a dco url instead of an asset object. 0 or the absence of the field indicates no such support. Beta feature   .
+ 
+ Note: optional
+ 
+ Need to discuss
+ */
+@property (nonatomic , strong) NSString *dURLSupport;
+
+/*
+  Description - Set to 1 when the native ad supports buyer-specific privacy
+ notice. Set to 0 (or    field    absent) when the native ad doesn’t support custom privacy links or if
+ support is unknown.
+ 
+ Note: optional
+ */
+
+@property (nonatomic , strong) NSString *privacy;
+@property (nonatomic , assign) int titleLength;
+@property (nonatomic , assign) int mainImageHeight;
+@property (nonatomic , assign) int mainImageWidth;
+@property (nonatomic , assign) int iconImageHeight;
+@property (nonatomic , assign) int iconImageWidth;
+
+@property (nonatomic , assign) int sponsoredLength;
+@property (nonatomic , assign) int descriptionLength;
+@property (nonatomic , assign) int ctaTextLength;
+
+@property (nonatomic , assign) int maxVideoDuration;
+@property (nonatomic , assign) int minVideoDuration;
+
+/**
+     * Applies to mainImageMandatory and videoMandatory.
+     * -1 : false - not needed
+     * 1 :  true - mandatory
+     * 0 : default - required becomes 0 and server may send or may not send the asset
+     */
+
+@property (nonatomic , assign) int mainImageRequired;
+@property (nonatomic , assign) int videoRequired;
+
+
+@property (nonatomic , assign) BOOL setStartMuted;
+
+@property (nonatomic, assign) int adFormat;
+
+@end
 
 @interface PokktAdConfig : NSObject
 
@@ -33,6 +183,8 @@ typedef enum : int
 @property (nonatomic, assign) BOOL isFullScreen;
 
 @property (nonatomic, assign) BOOL isAdCached;
+
+@property (nonatomic, strong) PokktNativeAdConfig *nativeConfig;
 
 //- (NSString *) getKey;
 
