@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = '11.0'
 
-    s.ios.vendored_frameworks = 'PokktSDK.framework'
+    s.ios.vendored_frameworks = 'PokktSDK/PokktSDK.framework'
 
     s.frameworks = "CoreData", "MediaPlayer", "Foundation", "UIKit", "CoreTelephony", "AdSupport", "CoreGraphics", "CoreMotion", "MessageUI", "EventKit", "EventKitUI", "CoreLocation", "AVFoundation"
 
