@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
-    s.name              = 'PokktAds'
+    s.name              = 'PokktAds_n'
 
     s.version           = '8.1.0'
 
     s.summary           = 'PokktAds SDK load ads'
 
-    s.homepage          = 'https://github.com/pokktdev/PokktPod.git'
+    s.homepage          = 'https://github.com/NukadukeParipiMan/PokktPod.git'
 
     s.author            = { 'Name' => 'plugindev@pokkt.com' }
 
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
     s.platform          = :ios
 
-    s.source            = { :http => 'https://github.com/pokktdev/PokktPod/releases/download/8.1.0/PokktSDK.zip' }
+    s.source            = { :http => 'https://github.com/NukadukeParipiMan/PokktPod/releases/download/8.1.0/PokktSDK.zip' }
 
     s.ios.deployment_target = '11.0'
 
