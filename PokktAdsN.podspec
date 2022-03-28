@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name              = 'PokktAds_n'
+    s.name              = 'PokktAdsN'
 
     s.version           = '8.1.0'
 
